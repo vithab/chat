@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/popup.css">
+  <title>Chat</title>
+</head>
+<body>
+  <div class="container">
+    <div class="main-window">
+      <div class="wrapper">
+        <div class="button-block">
+          <button class="settings_button">Настройки</button>
+          <button class="log_out_button">Выйти</button>
+        </div>
+        <div class="chat-area">
+          <template id="my-message">
+            <div class="yourself_message message">
+              <span>Я: </span><span id="text_my_message"></span>
+              <div class="time">18:45</div>
+            </div>
+          </template>
+          
+          <template id="compaion-message">
+            <div class="companion_message message">
+              <span>Собеседник: </span><span id="text_companion_message"></span>
+              <div class="time">18:45</div>
+            </div>
+          </template>
+        </div>
+
+        <form class="enter_message">
+          <div class="message-block">
+            <input type="text" class="input-message" placeholder="Сообщение...">
+            <button class="send_button">-></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="pop_up_set">
+    <div class="pop_up_settings">
+      <div class="settings_wrapper">
+        <p class="text-header">Настройки</p>
+        <form>
+          <div class="settings">
+            <p>Имя в чате</p>
+            <input id="name" type="text" placeholder="Аноним">
+            <button class="change_user">-></button>
+          </div>
+        </form>
+        <div class="pop_up_close">&#10006</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pop_up_authorize">
+    <div class="pop_up_authorization">
+      <div class="authorization_wrapper">
+        <p class="text-header">Авторизация</p>
+        <form>
+          <div class="authorization">
+            <p>Почта:</p>
+            <input id="email" type="text" placeholder="">
+            <div class="button_block">
+              <button class="get_code">Получить код</button>
+              <button class="enter_code">Ввести код</button>
+            </div>
+          </div>
+        </form>
+        <div class="pop_up_close">&#10006</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pop_up_login">
+    <div class="pop_up_confirmation">
+      <div class="confirmation_wrapper">
+        <p class="text-header">Подтверждение</p>
+        <form>
+          <div class="confirmation">
+            <p>Код:</p>
+            <input id="code" type="text" placeholder="">
+            <div class="button_block">
+              <button class="login_button">Войти</button>
+            </div>
+          </div>
+        </form>
+        <div class="pop_up_close">&#10006</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+  <script type="module" src="./modules/popup.js"></script>
+  <script type="module" src="./modules/render.js"></script>
+  <script type="module" src="./modules/net.js"></script>
+  <script type="module" src="./modules/const.js"></script>
+
+
+
+</body>
+</html>
