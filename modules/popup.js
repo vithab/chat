@@ -5,8 +5,6 @@ const logoutPopupButton = document.querySelector('.log_out_button');
 const loginButton = document.querySelector('.login_button');
 const enterCodeButton = document.querySelector('.enter_code');
 const inputCode = document.getElementById('code');
-
-
 const closePopupButtons = document.querySelectorAll('.pop_up_close');
 
 const settingsPopup = document.querySelector('.pop_up_set');
@@ -42,8 +40,8 @@ enterCodeButton.addEventListener('click', function(event) {
 loginButton.addEventListener('click', (event) => {
   event.preventDefault();
   console.log(inputCode.value);
-  setCookie('code', inputCode.value, {secure: true, 'max-age': 36000});
+  setCookie('code', inputCode.value, {secure: true, 'max-age': 360000});
   console.log(getCookie('code'));
-})
+});
 
 // setTimeout( () => { logoutPopup.classList.add('active') }, 1000)

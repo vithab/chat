@@ -1,4 +1,4 @@
-import { getCookie } from "./storage.js";
+import { getCookie, setCookie } from "./storage.js";
 
 const getCodeButton = document.querySelector('.get_code');
 const inputEmail = document.getElementById('email');
@@ -59,6 +59,8 @@ getCodeButton.addEventListener('click', (event) => {
 changeUserButton.addEventListener('click', (event) => {
   event.preventDefault();
   console.log(inputName.value)
+  setCookie('name', inputName.value, {secure: true, 'max-age': 360000});
+
   patchName('https://edu.strada.one/api/user', { name: inputName.value });
   getUser('https://edu.strada.one/api/user/me')
 })
