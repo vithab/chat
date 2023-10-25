@@ -56,6 +56,7 @@ button {
 }
 
 .time {
+  margin-top: 10px;
   text-align: right;
   font-family: Roboto;
   font-size: 14px;
@@ -65,4 +66,12 @@ button {
   letter-spacing: 0em;
   color: #333333;
 
+}
+
+#user_name {
+  margin-right: 10px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: bold;
+  color: #160096;
 }
