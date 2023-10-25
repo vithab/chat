@@ -7,6 +7,7 @@ const getCodeButton = document.querySelector('.get_code');
 const inputEmail = document.getElementById('email');
 const inputName = document.getElementById('name');
 const changeUserButton = document.querySelector('.change_user');
+const messageForm = document.querySelector('.enter_message');
 const token = getCookie('code');
 
 // Определяем функцию которая принимает в качестве параметров url и данные которые необходимо обработать:
@@ -80,29 +81,48 @@ changeUserButton.addEventListener('click', (event) => {
   getUser('https://edu.strada.one/api/user/me')
 });
 
+connectWebsocket();
 
-const socket = new WebSocket(`wss://edu.strada.one/websockets?${token}`);
-socket.OPEN;
-
-socket.onopen = () => {
-  console.log("[open] Соединение установлено");
-  console.log("Отправляем данные на сервер");
-}
-
-export function sendMessageHandler(event) {
-  event.preventDefault();
+function connectWebsocket() {
+  const socket = new WebSocket(`wss://edu.strada.one/websockets?${token}`);
   
-  let input = document.querySelector('.input-message');
-  const inputText = input.value;
+  socket.onopen = () => {
+    console.log("[open] Соединение установлено");
+    console.log("Можно отправить сообщения на сервер");
+    
+    function sendMessageHandler(e) {
+      e.preventDefault();
+
+      let input = document.querySelector('.input-message');
+      let inputText = input.value;
+
+      if(inputText != '') {
+        console.log(inputText);
+        
+        socket.send(JSON.stringify({ text: `${inputText}`}));
+      };
+
+      input.value = '';
+    }
+
+    messageForm.onsubmit = function (event) {
+      sendMessageHandler(event);
+    };
+  };
   
-  socket.send(JSON.stringify({ text: inputText }));
-
-  input.value = '';
+  socket.onmessage = function(event) { 
+    console.log(event.data);
+    const dataJson = JSON.parse(event.data);
+    addMessage(dataJson._id, dataJson.user.name, dataJson.text, dataJson.createdAt, dataJson.user.email);
+    messagesRender(MESSAGES);
+  };
+  
+  socket.onclose = event => {
+    console.log('Websocket closed. Code: ' + event.code + event.reason);
+    setTimeout(connectWebsocket(), 2000);
+  };
+  
+  socket.onerror = (error) => {
+    console.error(`Websocket error: ${error}`);
+  }
 }
-
-socket.onmessage = function(event) { 
-  console.log(event.data);
-  const dataJson = JSON.parse(event.data);
-  addMessage(dataJson._id, dataJson.user.name, dataJson.text, dataJson.createdAt, dataJson.user.email);
-  messagesRender(MESSAGES);
-};
