@@ -4,7 +4,6 @@
   width: 320px;
   border: 1px solid;
   background: rgb(201, 255, 255);
-
 }
 
 .main-window, .button-block,
@@ -33,6 +32,11 @@ button {
 }
 
 .chat-area {
+  /* display: flex;
+  flex-direction: column; */
+  overflow-y: scroll;
+  height: 500px;
+  overflow-wrap: break-word;
   border: 1px solid;
   margin-bottom: 8px;
 }
